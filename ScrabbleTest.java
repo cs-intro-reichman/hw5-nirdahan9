@@ -2,8 +2,7 @@ import java.io.*;
 
 public class ScrabbleTest {
     public static void main(String[] args) {
-        System.out.println(Scrabble.wordScore("cat"));
-        testWordScore();
+        testPlayGameWithMockInput();
         if (args.length == 0) {
             System.out.println("Please provide a specific test to run: isWordInDictionary, wordScore, createHand, playHand, playHandWithMockInput, or playGameWithMockInput.");
             return;

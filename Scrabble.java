@@ -48,6 +48,14 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
+		In in = new In(WORDS_FILE);
+        NUM_OF_WORDS = 0;
+		while (!in.isEmpty()) {
+			// Reads the next "token" from the file. A token is defined as a string of 
+			// non-whitespace characters. Whitespace is either space characters, or  
+			// end-of-line characters.
+			DICTIONARY[NUM_OF_WORDS++] = in.readString().toLowerCase();
+		}
 		for(int i = 0 ; i < DICTIONARY.length ; i ++) {
 			if(DICTIONARY[i] != null) {
 				if(DICTIONARY[i].toLowerCase().equals(word)) return true;
@@ -61,14 +69,13 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		int score = 0;
-		if(!isWordInDictionary(word)) return 0;
 		word = word.toLowerCase();
-		if(word.toLowerCase().contains("runi")) score += 1000;
-		if(word.length() == HAND_SIZE) score += 50;
 		for(int i = 0 ; i < word.length() ; i ++) {
 			score += SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)-97)];
 		}
-		score *= HAND_SIZE;
+		score *= word.length();
+		if(MyString.subsetOf("runi", word)) score += 1000;
+		if(word.length() == HAND_SIZE) score += 50;
 		return score;
 	}
 
