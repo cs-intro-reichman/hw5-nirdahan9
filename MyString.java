@@ -44,7 +44,9 @@ public class MyString {
         for(int i = 0 ; i < len ; i ++) {
 			if(str2.indexOf(str1.charAt(0)) == -1) return false;
             else {
+                str2 = remove(str2, "" + str1.charAt(0));
                 str1 = remove(str1, "" + str1.charAt(0));
+                
             }
 		}
 		return true;
