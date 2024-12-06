@@ -48,13 +48,11 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		In in = new In(WORDS_FILE);
-        NUM_OF_WORDS = 0;
-		while (!in.isEmpty()) {
-			// Reads the next "token" from the file. A token is defined as a string of 
-			// non-whitespace characters. Whitespace is either space characters, or  
-			// end-of-line characters.
-			DICTIONARY[NUM_OF_WORDS++] = in.readString().toLowerCase();
+		if (Scrabble.NUM_OF_WORDS == 0) {
+			In in = new In(WORDS_FILE);
+			while (!in.isEmpty()) {
+				DICTIONARY[NUM_OF_WORDS++] = in.readString().toLowerCase();
+			}
 		}
 		for(int i = 0 ; i < DICTIONARY.length ; i ++) {
 			if(DICTIONARY[i] != null) {
@@ -110,7 +108,9 @@ public class Scrabble {
 			while(!MyString.subsetOf(input, hand) || input.length() < 2) {
 				System.out.println("Invalid word. Try again.");
 				input = in.readString();
-			}	 
+				if(input.equals(".")) break;
+			}
+			if(input.equals(".")) break;
 			if(isWordInDictionary(input)) {
 				score += wordScore(input);
 				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
