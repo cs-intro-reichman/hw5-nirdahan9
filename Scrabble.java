@@ -107,6 +107,8 @@ public class Scrabble {
 			if(input.equals(".")) break;
 			while(!MyString.subsetOf(input, hand) || input.length() < 2) {
 				System.out.println("Invalid word. Try again.");
+				System.out.println("Current Hand: " + MyString.spacedString(hand));
+				System.out.println("Enter a word, or '.' to finish playing this hand:");
 				input = in.readString();
 				if(input.equals(".")) break;
 			}
@@ -120,6 +122,7 @@ public class Scrabble {
 			if(hand.length() == 0) break;
 			
 		}
+
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
